@@ -1,0 +1,13 @@
+namespace part3_mvc_consume.Models
+{
+    public class Users
+    {
+
+        public int userID { get; set; } 
+        public string fullName { get; set; } 
+        public string email { get; set; } 
+        public string password { get; set; } 
+        public string role { get; set; }
+    }
+    }
+
