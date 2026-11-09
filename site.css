@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial
+}
+
+body {
+    margin: 0;
+    background: #f3efe9
+}
+
+.phone {
+    max-width: 430px;
+    margin: 0 auto;
+    background: #fffdf8;
+    min-height: 100vh;
+    padding-bottom: 80px
+}
+
+header {
+    background: #0f2a3a;
+    color: #fff;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between
+}
+
+    header b {
+        font-size: 28px
+    }
+
+        header b i {
+            color: #e87a5f;
+            font-style: normal
+        }
+
+.wrap {
+    padding: 16px
+}
+
+.crumb {
+    color: #e87a5f;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1px
+}
+
+h1 {
+    font-size: 30px;
+    margin: 6px 0 14px
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 10px #0001;
+    margin-bottom: 14px
+}
+
+label {
+    font-weight: 700;
+    font-size: 13px;
+    display: block;
+    margin: 14px 0 6px
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fffdf8
+}
+
+.btn {
+    background: #e87a5f;
+    color: #fff;
+    border: 0;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 16px
+}
+
+.btn2 {
+    background: #0f2a3a;
+    color: #fff;
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    border-top: 1px solid #eee
+}
+
+    nav a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 700
+    }
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f2a3a;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 20px;
+    z-index: 99
+}
+
+.tag {
+    background: #ffe8e0;
+    color: #c33;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800
+}
+
+.text-danger {
+    color: red;
+    font-size: 12px
+}
+
+.counts {
+    display: flex;
+    gap: 10px
+}
+
+    .counts .card {
+        flex: 1;
+        text-align: center
+    }
+
+    .counts b {
+        font-size: 24px;
+        color: #0f2a3a
+    }
