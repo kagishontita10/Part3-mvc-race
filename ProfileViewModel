@@ -1,0 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace part3_mvc_consume.Models
+{
+    public class ProfileViewModel
+    {
+
+
+
+        [Required(ErrorMessage = "Please fill out this field")] public string Name { get; set; } = "Alex";
+        [Required(ErrorMessage = "Please fill out this field")] public string Surname { get; set; } = "Mokoena";
+        [Required(ErrorMessage = "Please fill out this field")] public int Age { get; set; } = 29;
+    }
+}
+
+    
+
