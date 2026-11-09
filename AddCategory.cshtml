@@ -1,0 +1,11 @@
+@model part3_mvc_consume.Models.categories
+<div class="crumb">RACEDAY / ORGANISER</div>
+<h1>Add Category</h1>
+<div class="card">
+    <form asp-action="AddCategory" method="post">
+        <label>Event ID</label><input asp-for="eventID" required />
+        <label>Category Type</label><input asp-for="categoryType" placeholder="5km / 10km / half marathon" required />
+        <label>Age</label><input asp-for="age" required />
+        <button class="btn" type="submit">Add Category</button>
+    </form>
+</div>
