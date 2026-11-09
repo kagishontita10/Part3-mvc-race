@@ -1,0 +1,11 @@
+@model part3_mvc_consume.Models.Results
+<div class="crumb">RACEDAY / ORGANISER</div>
+<h1>Enter Results</h1>
+<div class="card">
+    <form asp-action="AddResult" method="post">
+        <label>Enrolment ID</label><input asp-for="enrolmentID" required />
+        <label>Finish Time</label><input asp-for="finishTime" placeholder="00:32:15" required />
+        <label>Position</label><input asp-for="position" required />
+        <button class="btn" type="submit">Save Result</button>
+    </form>
+</div>
