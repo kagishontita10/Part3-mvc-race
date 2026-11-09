@@ -1,0 +1,28 @@
+using part3_mvc_consume.Models;
+namespace part3_mvc_consume.Services
+{
+    public class ApiServices_categories
+    {
+
+        private readonly HttpClient _httpClient;
+        public ApiServices_categories(HttpClient http) { _httpClient = http; }
+        public async Task<string> get_categories() { HttpResponseMessage res = await _httpClient.GetAsync("api/categoriesController/getCategories"); return await res.Content.ReadAsStringAsync(); }
+        public async Task<string> store_category(string userID, categories c)
+        {
+            string url = $"api/categoriesController/addCategory?userID={userID}&eventID={c.eventID}&categoryType={Uri.EscapeDataString(c.categoryType)}&age={c.age}";
+            HttpResponseMessage res = await _httpClient.PostAsync(url, null); return await res.Content.ReadAsStringAsync();
+        }
+        public async Task<string> update_category(string userID, string categoryID, string categoryType, string age)
+        {
+            string url = $"api/categoriesController/updateCategory?userID={userID}&categoryID={categoryID}&categoryType={Uri.EscapeDataString(categoryType)}&age={age}";
+            HttpResponseMessage res = await _httpClient.PutAsync(url, null); return await res.Content.ReadAsStringAsync();
+        }
+        public async Task<string> delete_category(string userID, string categoryID)
+        {
+            HttpResponseMessage res = await _httpClient.DeleteAsync($"api/categoriesController/deleteCategory?userID={userID}&categoryID={categoryID}"); return await res.Content.ReadAsStringAsync();
+        }
+    }
+}
+
+    
+
