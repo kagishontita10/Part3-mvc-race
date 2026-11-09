@@ -1,0 +1,17 @@
+<!-- Views/Users/Register.cshtml -->
+@model part3_mvc_consume.Models.Users
+<div class="crumb">RACEDAY</div>
+<h1>Register</h1>
+@if (ViewBag.Message != null)
+{
+    <div class="toast" style="position:static;transform:none">@ViewBag.Message</div>
+}
+<div class="card">
+    <form asp-action="Register" method="post">
+        <label>Full Name</label><input asp-for="fullName" required /><span asp-validation-for="fullName" class="text-danger"></span>
+        <label>Email</label><input asp-for="email" required />
+        <label>Password</label><input asp-for="password" type="password" required />
+        <label>Role</label><input asp-for="role" placeholder="organiser or participant" required />
+        <button class="btn" type="submit">Register</button>
+    </form>
+</div>
