@@ -1,0 +1,49 @@
+//Login.cshtml
+<div class="crumb">RACEDAY</div>
+<h1>Login</h1>
+@if (ViewBag.Message != null)
+{
+    <div class="toast" style="position:static;transform:none">@ViewBag.Message</div>
+}
+<div class="card">
+    <form asp-action="Login" method="post">
+        <label>Email</label><input name="email" required />
+        <label>Password</label><input name="password" type="password" required />
+        <button class="btn" type="submit">Login</button>
+    </form>
+</div>
+***************
+//Register.cshtml
+<!-- Views/Users/Register.cshtml -->
+@model part3_mvc_consume.Models.Users
+<div class="crumb">RACEDAY</div>
+<h1>Register</h1>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="toast" style="position:static;transform:none;background:red;color:white;padding:10px;">@ViewBag.Message</div>
+}
+
+<div class="card">
+    <form asp-action="Register" method="post" novalidate>
+        <label>Full Name</label>
+        <input type="text" name="fullName" value="@Model?.fullName" autocomplete="name" />
+
+        <label>Email</label>
+        <input type="email" name="email" value="@Model?.email" autocomplete="email" />
+
+        <label>Password</label>
+        <input type="password" name="password" value="@Model?.password" autocomplete="new-password" />
+
+        <label>Role</label>
+        <select name="role">
+            <option value="">-- Choose Role --</option>
+            <option value="Organiser" selected="@(Model?.role == "Organiser")">Organiser</option>
+            <option value="Participant" selected="@(Model?.role == "Participant")">Participant</option>
+        </select>
+
+        <button class="btn" type="submit" formnovalidate>Register</button>
+    </form>
+</div>
