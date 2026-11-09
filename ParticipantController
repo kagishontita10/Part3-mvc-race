@@ -1,0 +1,33 @@
+using Microsoft.AspNetCore.Mvc;
+using part3_mvc_consume.Models;
+using part3_mvc_consume.Services;
+
+namespace part3_mvc_consume.Controllers
+{
+    public class ParticipantController : Controller
+    {
+        private readonly ApiServices_events _events; private readonly ApiServices_categories _cats; private readonly ApiServices_Enrolments _enrol; private readonly ApiServices_Results _res; private readonly ApiServices_Users _users;
+        public ParticipantController(ApiServices_events e, ApiServices_categories c, ApiServices_Enrolments en, ApiServices_Results r, ApiServices_Users u) { _events = e; _cats = c; _enrol = en; _res = r; _users = u; }
+
+        // DASHBOARD WITH COUNTS - My Races / Upcoming / Completed
+        public async Task<IActionResult> Dashboard()
+        {
+            string userID = HttpContext.Session.GetString("userID") ?? "0";
+            string eventsRaw = await _events.get_events();
+            string enrolRaw = await _enrol.get_enrolments(userID);
+            // Your API returns string like "1 Kouga Trail Run ..." - we count by lines / by enrolments
+            int total = eventsRaw.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length;
+            int myRaces = enrolRaw.Contains("No enrolments") ? 0 : enrolRaw.Split('\n', StringSplitOptions.RemoveEmptyEntries).Length;
+            var vm = new DashboardViewModel { TotalEvents = total, MyRaces = myRaces, Upcoming = total, Completed = 0, RawEvents = eventsRaw, RawEnrolments = enrolRaw };
+            return View(vm);
+        }
+        public async Task<IActionResult> Browse() { ViewBag.Message = await _events.get_events(); return View(); }
+        public async Task<IActionResult> Details() { ViewBag.Message = await _events.get_events(); ViewBag.Categories = await _cats.get_categories(); return View(); }
+        [HttpGet] public IActionResult Enrol() { return View(new Enrolments()); }
+        [HttpPost] public async Task<IActionResult> Enrol(Enrolments e) { e.userID = Convert.ToInt32(HttpContext.Session.GetString("userID") ?? "0"); if (string.IsNullOrEmpty(e.status)) e.status = "Active"; if (string.IsNullOrEmpty(e.enrolmemtDate)) e.enrolmemtDate = DateTime.Now.ToString("yyyy-MM-dd"); string m = await _enrol.store_enrolment(e); if (m.Contains("successfully")) return RedirectToAction("MyEnrolments"); ViewBag.Message = m; return View(e); }
+        public async Task<IActionResult> MyEnrolments() { ViewBag.Message = await _enrol.get_enrolments(HttpContext.Session.GetString("userID")); return View(); }
+        public async Task<IActionResult> Results() { ViewBag.Message = await _res.get_results(HttpContext.Session.GetString("userID")); return View(); }
+        [HttpGet] public IActionResult Profile() { return View(new ProfileViewModel()); }
+        [HttpPost] public async Task<IActionResult> SaveProfile(ProfileViewModel m) { if (!ModelState.IsValid) return View("Profile", m); string msg = await _users.update_profile(HttpContext.Session.GetString("userID"), m.Name + " " + m.Surname, HttpContext.Session.GetString("email")); TempData["Msg"] = "Profile saved successfully"; return RedirectToAction("Profile"); }
+    }
+}
