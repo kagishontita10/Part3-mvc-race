@@ -1,0 +1,66 @@
+//Browse.cshtml
+div class="crumb">RACEDAY / PARTICIPANT</div><h1>Find your next race</h1>
+<div class="card"><div class="crumb">GET RACE-READY</div><b>Browse upcoming races and enrol in one tap.</b></div>
+<div class="card"><p>@ViewBag.Message</p><br/><a class="btn2" href="/Participant/Details">Event details</a> <a class="btn2" href="/Participant/Enrol">Enrol</a> <a class="btn2" href="/Participant/Results">Results</a></div
+**********************************
+//Dasboard.cshtml
+@model part3_mvc_consume.Models.DashboardViewModel
+<div class="crumb">RACEDAY / PARTICIPANT</div>
+<h1>Dashboard</h1>
+<div class="counts">
+    <div class="card"><b>@Model.MyRaces</b><div>My Races</div></div>
+    <div class="card"><b>@Model.Upcoming</b><div>Upcoming</div></div>
+    <div class="card"><b>@Model.Completed</b><div>Completed</div></div>
+</div>
+<div class="card"><b>@Model.TotalEvents Events Available</b><p>@Model.RawEvents</p><a class="btn2" href="/Participant/Browse">Browse Events</a> <a class="btn2" href="/Participant/MyEnrolments">My Enrolments</a></div>
+<div class="card"><b>My Enrolments</b><p>@Model.RawEnrolments</p><
+************************
+//Details.cshtml
+<div class="crumb">RACEDAY / PARTICIPANT</div>
+<h1>Event Details</h1>
+<div class="card"><p>@ViewBag.Message</p><p><b>Categories:</b> @ViewBag.Categories</p></div>
+<a class="btn2" href="/Participant/Browse">← Back</a> <a class="btn2" href="/Participant/Enrol">Enrol Now</a> <a class="btn2" href="/Participant/Results">View Results</a>
+**************************
+//Enrol.cshtml
+@model part3_mvc_consume.Models.Enrolments
+<div class="crumb">RACEDAY / PARTICIPANT</div>
+<h1>Enrol in Event</h1>
+@if (ViewBag.Message != null)
+{
+    <div class="toast" style="position:static;transform:none">@ViewBag.Message</div>
+}
+<div class="card">
+    <form asp-action="Enrol" method="post">
+        <label>Event ID</label><input asp-for="eventID" required />
+        <label>Category ID</label><input asp-for="categoryID" required />
+        <label>Enrolment Date</label><input asp-for="enrolmemtDate" type="date" required />
+        <label>Status</label><input asp-for="status" value="Active" required />
+        <button class="btn" type="submit">Enrol</button>
+    </form>
+</div>
+
+***************
+//MyEnrolments.cshtml
+div class="crumb">RACEDAY / PARTICIPANT</div><h1>My Enrolments</h1>
+<div class="card">@if(ViewBag.Message!=null){<p>@ViewBag.Message</p>}else{<p>No enrolments yet</p>}<br/><a class="btn2" href="/Participant/Browse">Browse Events</a></div>
+**************
+//profile.cshtml
+@model part3_mvc_consume.Models.ProfileViewModel
+<div class="crumb">RACEDAY / PARTICIPANT</div>
+<h1>My profile</h1>
+<div id="profileMessage"></div>
+<div class="card">
+    <form id="profileForm" asp-action="SaveProfile" method="post">
+        <label>Name</label><input asp-for="Name" required /><span asp-validation-for="Name" class="text-danger"></span>
+        <label>Surname</label><input asp-for="Surname" required /><span asp-validation-for="Surname" class="text-danger"></span>
+        <label>Age</label><input asp-for="Age" type="number" required /><span asp-validation-for="Age" class="text-danger"></span>
+        <button class="btn" type="submit">Save profile</button>
+    </form>
+</div>
+************
+//Results.cshtml
+<div class="crumb">RACEDAY / PARTICIPANT</div>
+<h1>Results</h1>
+<div class="card"><p>@ViewBag.Message</p></div>
+<a class="btn2" href="/Participant/Browse">← Back to Browse</a>
+
