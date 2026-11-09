@@ -1,0 +1,17 @@
+@model part3_mvc_consume.Models.Events
+<div class="crumb">RACEDAY / ORGANISER</div>
+<h1>Create Event</h1>
+@if (ViewBag.Message != null)
+{
+    <div class="toast" style="position:static;transform:none">@ViewBag.Message</div>
+}
+<div class="card">
+    <form asp-action="Create" method="post">
+        <label>Event Name</label><input asp-for="EventName" required />
+        <label>Description</label><input asp-for="description" required />
+        <label>Event Date</label><input asp-for="EventDate" type="date" required />
+        <label>Location</label><input asp-for="location" required />
+        <label>Event Type</label><input asp-for="eventType" placeholder="run / walk / cycle" required />
+        <button class="btn" type="submit">Create Event</button>
+    </form>
+</div>
