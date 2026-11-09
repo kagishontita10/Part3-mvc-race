@@ -1,0 +1,20 @@
+!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>RaceDay.</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="phone">
+        <header><div><b>RaceDay<i>.</i></b><div style="font-size:10px;letter-spacing:2px;opacity:.7">RACEDAY</div></div><a href="/Home/Index" class="btn2" style="background:#fff;color:#333">Switch role</a></header>
+        @if (TempData["Msg"] != null)
+        {
+            <div id="toast" class="toast">@TempData["Msg"]</div>
+        }
+        <div class="wrap">@RenderBody()</div>
+        <nav><a href="/Participant/Dashboard">Dashboard</a><a href="/Participant/Browse">Browse</a><a href="/Organiser/Dashboard">Organiser</a><a href="/Participant/Profile">Profile</a></nav>
+    </div>
+    <script src="~/js/site.js"></script>@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
